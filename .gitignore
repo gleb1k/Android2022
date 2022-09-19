@@ -20,6 +20,7 @@ build/**
 .signing/
 
 # User-specific configurations
+/.idea/
 *.iml
 *.ipr
 *.iws
