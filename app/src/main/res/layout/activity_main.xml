@@ -4,15 +4,520 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/view_circle_avatar"
+        style="@style/circle"
+        android:layout_width="119dp"
+        android:layout_height="119dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toTopOf="@+id/fio_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+    <View
+        android:id="@+id/view_dark"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/new_black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_info_text" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="155dp"
+        android:background="@drawable/rounded_corners_view"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corners_view"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corners_view"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corners_view"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.96"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.04"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/roundedbutton"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/widgets_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/roundedbutton"
+        android:src="@drawable/widgets"
+        app:layout_constraintEnd_toStartOf="@id/menu_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/menu_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/roundedbutton"
+        android:src="@drawable/more_vert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_avatar"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="99dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nazuna1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/circle" />
+
+    <TextView
+        android:id="@+id/fio_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Глеб Гафеев"
+        android:textColor="@color/new_white"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/view_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/add_info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="262dp"
+        android:drawableRight="@drawable/arrow_circle_right"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/new_blue"
+        android:fontFamily="@font/vk_sans_medium"
+        android:gravity="start|center_vertical"
+        android:text="Добавьте информацию о себе"
+        android:textColor="@color/new_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/share_btn"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_rounded"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_start"
+        app:layout_constraintStart_toStartOf="@+id/guideline_end"
+        app:layout_constraintTop_toBottomOf="@id/add_info_text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        app:layout_constraintStart_toStartOf="@id/share_btn"
+        app:layout_constraintEnd_toEndOf="@id/share_btn"
+        app:layout_constraintTop_toTopOf="@id/share_btn"
+        app:layout_constraintBottom_toBottomOf="@id/share_btn"
+        android:text="Опубликовать"
+        android:textSize="15dp"
+        android:textColor="@color/new_white"
+        android:fontFamily="@font/vk_sans_bold"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_circle"
+        android:layout_marginEnd="142dp"
+        app:tint="@color/new_white"
+        app:layout_constraintStart_toStartOf="@id/share_btn"
+        app:layout_constraintEnd_toEndOf="@id/share_btn"
+        app:layout_constraintTop_toTopOf="@id/share_btn"
+        app:layout_constraintBottom_toBottomOf="@id/share_btn"/>
+
+    <TextView
+        android:id="@+id/text_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="118 друзей"
+        android:textColor="@color/new_white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_friend3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/timur"
+        android:layout_marginStart="-6dp"
+        app:layout_constraintStart_toEndOf="@id/image_friend2"
+        app:layout_constraintBottom_toBottomOf="@+id/image_friend2"
+        app:layout_constraintTop_toTopOf="@+id/image_friend2"
+        app:shapeAppearanceOverlay="@style/circle"
+        app:strokeColor="@color/grey_dark"
+        app:strokeWidth="2dp" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_friend2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="23dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ebiba"
+        android:layout_marginStart="-6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_friend1"
+        app:layout_constraintStart_toEndOf="@id/image_friend1"
+        app:layout_constraintTop_toTopOf="@+id/image_friend1"
+        app:shapeAppearanceOverlay="@style/circle"
+        app:strokeColor="@color/grey_dark"
+        app:strokeWidth="2dp" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_friend1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/man"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@id/view2"
+        app:layout_constraintTop_toTopOf="@id/view2"
+        app:shapeAppearanceOverlay="@style/circle"
+        app:strokeColor="@color/grey_dark"
+        app:strokeWidth="3dp" />
+
+
+    <TextView
+        android:id="@+id/text_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/photo_icon"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/new_white"
+        android:fontFamily="@font/vk_sans_bold"
+        android:gravity="start|center_vertical"
+        android:text="Фото"
+        android:textColor="@color/new_white"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@id/text_video"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/text_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/play_circle"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/white_icons"
+        android:fontFamily="@font/vk_sans_bold"
+        android:gravity="start|center_vertical"
+        android:text="Видео"
+        android:textColor="@color/gray_text_1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@id/text_clips"
+        app:layout_constraintStart_toEndOf="@+id/text_photo"
+        app:layout_constraintTop_toTopOf="@+id/text_photo" />
+
+    <TextView
+        android:id="@+id/text_clips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/stars"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/white_icons"
+        android:fontFamily="@font/vk_sans_bold"
+        android:gravity="start|center_vertical"
+        android:text="Клипы"
+        android:textColor="@color/gray_text_1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@id/text_stories"
+        app:layout_constraintStart_toEndOf="@+id/text_video"
+        app:layout_constraintTop_toTopOf="@+id/text_video" />
+
+    <TextView
+        android:id="@+id/text_stories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/favorite"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/white_icons"
+        android:fontFamily="@font/vk_sans_bold"
+        android:gravity="start|center_vertical"
+        android:text="Сюжеты"
+        android:textColor="@color/gray_text_1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_clips"
+        app:layout_constraintTop_toTopOf="@+id/text_clips" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_center"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nazuna1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_photo"
+        app:shapeAppearanceOverlay="@style/rounded_square" />
+
+    <TextView
+        android:id="@+id/text_download_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/add"
+        android:drawableTint="@color/new_white"
+        android:fontFamily="@font/vk_sans_bold"
+        android:gravity="start|center_vertical"
+        android:text="Загрузить фото"
+        android:textColor="@color/new_white"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_center" />
+
+    <TextView
+        android:id="@+id/text_show_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/navigate_next"
+        android:drawableTint="@color/new_white"
+        android:fontFamily="@font/vk_sans_bold"
+        android:gravity="start|center_vertical"
+        android:text="Показать ещё"
+        android:textColor="@color/new_white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_download_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_center"
+        app:layout_constraintTop_toTopOf="@+id/text_download_photo" />
+
+    <TextView
+        android:id="@+id/text_all_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Все записи"
+        android:textColor="@color/new_white"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@id/text_my_posts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/text_my_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Мои записи"
+        android:textColor="@color/gray_text_1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@id/text_archive"
+        app:layout_constraintStart_toEndOf="@+id/text_all_posts"
+        app:layout_constraintTop_toTopOf="@+id/text_all_posts" />
+
+    <TextView
+        android:id="@+id/text_archive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Архив"
+        android:textColor="@color/gray_text_1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_my_posts"
+        app:layout_constraintTop_toTopOf="@+id/text_my_posts" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="text_archive,text_my_posts,text_all_posts"
+        tools:layout_editor_absoluteX="304dp" />
+
+    <ImageView
+        android:id="@+id/img_lupa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/lupa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/barrier"
+        app:layout_constraintTop_toTopOf="@+id/text_archive"
+        app:tint="@color/gray_text_1" />
+
+    <View
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/grey_nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_nav_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:drawableTop="@drawable/home_nav"
+        android:drawableTint="@color/new_white"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Главная"
+        android:textColor="@color/new_white"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_nav"
+        app:layout_constraintEnd_toStartOf="@id/text_nav_2"
+        app:layout_constraintStart_toStartOf="@id/bottom_nav" />
+
+    <TextView
+        android:id="@+id/text_nav_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/widgets"
+        android:drawableTint="@color/gray_text_1"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Сервисы"
+        android:textColor="@color/gray_text_1"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toStartOf="@id/text_nav_3"
+        app:layout_constraintStart_toEndOf="@id/text_nav_1"
+        app:layout_constraintTop_toTopOf="@+id/text_nav_1" />
+
+    <TextView
+        android:id="@+id/text_nav_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/chat_bubble"
+        android:drawableTint="@color/gray_text_1"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Мессенджер"
+        android:textColor="@color/gray_text_1"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
+        app:layout_constraintStart_toStartOf="@+id/bottom_nav"
+        app:layout_constraintTop_toTopOf="@+id/text_nav_2" />
+
+    <TextView
+        android:id="@+id/text_nav_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/stars_40px"
+        android:drawableTint="@color/gray_text_1"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Клипы"
+        android:textColor="@color/gray_text_1"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toStartOf="@id/text_nav_5"
+        app:layout_constraintStart_toEndOf="@id/text_nav_3"
+        app:layout_constraintTop_toTopOf="@+id/text_nav_3" />
+
+    <TextView
+        android:id="@+id/text_nav_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/video_library"
+        android:drawableTint="@color/gray_text_1"
+        android:fontFamily="@font/vk_sans_bold"
+        android:text="Видео"
+        android:textColor="@color/gray_text_1"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="@id/bottom_nav"
+        app:layout_constraintStart_toEndOf="@id/text_nav_4"
+        app:layout_constraintTop_toTopOf="@+id/text_nav_4" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
