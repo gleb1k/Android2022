@@ -33,7 +33,7 @@ class CustomDialogFragment(
                     //почему-то ошибка не выводится(
                     textInputLayout.error = "Не верный формат данных"
                     //пока что так
-                    Toast.makeText(context,"Не верный формат данных", Toast.LENGTH_SHORT ).show()
+                    Toast.makeText(context,"Не верный формат данных ", Toast.LENGTH_SHORT ).show()
                 }
             }
             .setNegativeButton("CLOSE") { dialog, _ ->
