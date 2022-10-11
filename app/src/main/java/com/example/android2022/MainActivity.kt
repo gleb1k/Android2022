@@ -14,11 +14,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
-        getSupportActionBar()?.hide();
-
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, MainFragment())
+            .replace(
+                R.id.fragment_container,
+                MainFragment()
+            )
 
-
+            .commit()
     }
 }
