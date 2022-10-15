@@ -10,9 +10,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private var binding: FragmentMainBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
 
-        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
