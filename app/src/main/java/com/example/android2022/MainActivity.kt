@@ -3,6 +3,7 @@ package com.example.android2022
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.android2022.databinding.ActivityMainBinding
+import com.example.android2022.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(it.root)
         }
 
-        if(savedInstanceState !=null) {
+        if (savedInstanceState != null) {
             return
         }
 
