@@ -1,16 +1,17 @@
 package com.example.android2022.model
 
 object Repository {
+
     val ads = arrayListOf(
         MainItem.Advertisement(
-            title = "VERY USEFULL AD",
+            title = "Продам гараж!!!",
             url = "https://re-media.plektan.com/img/prop/40/7f/407f503405e4ad187970a5873d2756a0.jpg"
         )
     )
 
     val cars = arrayListOf(
+
         MainItem.Car(
-            id = 0,
             name = "Silvia s15",
             brand = "Nissan",
             url = "https://img5.goodfon.ru/wallpaper/nbig/5/be/nissan-silvia-s15-spec-r-jdm.jpg",
@@ -21,7 +22,6 @@ object Repository {
                     "The Nissan Silvia was a legendary car in the drifting scene because of how well it could drift and the customization options available, mainly in Japan."
         ),
         MainItem.Car(
-            id = 1,
             name = "Skyline GT-R",
             brand = "Nissan",
             url = "https://i.pinimg.com/originals/c7/39/13/c73913343a24e5bba558198c42915ab2.jpg",
@@ -29,7 +29,6 @@ object Repository {
                     "Over time, the Nissan Skyline GT-R range of cars have become some of the most famous sports cars in the world – and an indispensable part of any serious car collection. "
         ),
         MainItem.Car(
-            id = 2,
             name = "Supra Mk4",
             brand = "Toyota",
             url = "https://p4.wallpaperbetter.com/wallpaper/541/314/477/toyota-supra-mk4-toyota-supra-toyota-japanese-cars-jdm-hd-wallpaper-preview.jpg",
@@ -39,16 +38,6 @@ object Repository {
                     "Though it stopped production in 2002, the Supra Mk4 is still highly prized by car enthusiasts today. The 2-door coupe features 280 hp, an aerodynamic body, and a 6-speed Getrag transmission that make it an incredible pleasure to drive. "
         ),
         MainItem.Car(
-            id = 3,
-            name = "RX-7",
-            brand = "Mazda ",
-            url = "https://hdpic.club/uploads/posts/2021-12/1640182549_1-hdpic-club-p-mazda-rx7-2.jpg",
-            info = "It may be hard to believe, but the Mazda RX-7 was first produced in 1978! Since then, it had several modifications, and finally ceased  production in 2002. During its lifetime, it became famous by starring in several computer games and movies like “Gran Turismo” and “Need for Speed”. These days, it’s hard to find – but it remains one of the most loved Japanese cars of all time.\n" +
-                    "\n" +
-                    "The RX-7 was Mazda’s challenge to high-tech models put out by Nissan and Toyota. What really set it apart was its light, sleek design, combined with a compact but powerful turbocharged 13B-REW rotor engine. It also offered a financial bonus. The rotary engine’s displacement is less than 1.5 litres – making it more fuel-efficient than traditional inline engines.  "
-        ),
-        MainItem.Car(
-            id = 4,
             name = "AE86",
             brand = "Toyota",
             url = "https://hdpic.club/uploads/posts/2022-01/1641701191_32-hdpic-club-p-toiota-ae-86-51.jpg",
@@ -63,7 +52,12 @@ object Repository {
                     "\nThe AE86 was never supposed to be a drift king. The legend says that mountain racer Keiichi Tsuchiya used to throw his AE86 sideways down the mountain as a novelty to amuse the crowd. But when a video of Keiichi performing the feat made it onto the internet, it instantly went viral."
         ),
         MainItem.Car(
-            id = 5,
+            name = "Oka",
+            brand = "VAZ",
+            url = "https://wrap-it.ru/wp-content/uploads/2019/01/4-1.jpg",
+            info = "Death on wheels"
+        ),
+        MainItem.Car(
             name = "Silvia s15",
             brand = "Nissan",
             url = "https://img5.goodfon.ru/wallpaper/nbig/5/be/nissan-silvia-s15-spec-r-jdm.jpg",
@@ -74,7 +68,6 @@ object Repository {
                     "The Nissan Silvia was a legendary car in the drifting scene because of how well it could drift and the customization options available, mainly in Japan."
         ),
         MainItem.Car(
-            id = 6,
             name = "Skyline GT-R",
             brand = "Nissan",
             url = "https://i.pinimg.com/originals/c7/39/13/c73913343a24e5bba558198c42915ab2.jpg",
@@ -82,7 +75,6 @@ object Repository {
                     "Over time, the Nissan Skyline GT-R range of cars have become some of the most famous sports cars in the world – and an indispensable part of any serious car collection. "
         ),
         MainItem.Car(
-            id = 7,
             name = "Supra Mk4",
             brand = "Toyota",
             url = "https://p4.wallpaperbetter.com/wallpaper/541/314/477/toyota-supra-mk4-toyota-supra-toyota-japanese-cars-jdm-hd-wallpaper-preview.jpg",
@@ -92,16 +84,6 @@ object Repository {
                     "Though it stopped production in 2002, the Supra Mk4 is still highly prized by car enthusiasts today. The 2-door coupe features 280 hp, an aerodynamic body, and a 6-speed Getrag transmission that make it an incredible pleasure to drive. "
         ),
         MainItem.Car(
-            id = 8,
-            name = "RX-7",
-            brand = "Mazda ",
-            url = "https://hdpic.club/uploads/posts/2021-12/1640182549_1-hdpic-club-p-mazda-rx7-2.jpg",
-            info = "It may be hard to believe, but the Mazda RX-7 was first produced in 1978! Since then, it had several modifications, and finally ceased  production in 2002. During its lifetime, it became famous by starring in several computer games and movies like “Gran Turismo” and “Need for Speed”. These days, it’s hard to find – but it remains one of the most loved Japanese cars of all time.\n" +
-                    "\n" +
-                    "The RX-7 was Mazda’s challenge to high-tech models put out by Nissan and Toyota. What really set it apart was its light, sleek design, combined with a compact but powerful turbocharged 13B-REW rotor engine. It also offered a financial bonus. The rotary engine’s displacement is less than 1.5 litres – making it more fuel-efficient than traditional inline engines.  "
-        ),
-        MainItem.Car(
-            id = 9,
             name = "AE86",
             brand = "Toyota",
             url = "https://hdpic.club/uploads/posts/2022-01/1641701191_32-hdpic-club-p-toiota-ae-86-51.jpg",
@@ -114,17 +96,32 @@ object Repository {
                     "\n" +
                     "One of the most famous cars in the world, and forever linked to tofu delivery, the AE86 is a lightweight, rear-wheel-drive, twin-cam, inline-four car that's pure fun. " +
                     "\nThe AE86 was never supposed to be a drift king. The legend says that mountain racer Keiichi Tsuchiya used to throw his AE86 sideways down the mountain as a novelty to amuse the crowd. But when a video of Keiichi performing the feat made it onto the internet, it instantly went viral."
+        ),
+        MainItem.Car(
+            name = "Oka",
+            brand = "VAZ",
+            url = "https://wrap-it.ru/wp-content/uploads/2019/01/4-1.jpg",
+            info = "Death on wheels"
         ),
     )
-    val carsMutable: MutableList<MainItem.Car>
-        get() = cars.map {
-            MainItem.Car(
-                id = it.id,
-                name = it.name,
-                brand = it.brand,
-                url = it.url,
-                info = it.info
-            )
-        }.toMutableList()
 
+    var dataList: List<MainItem> = listOf()
+
+    fun createList() {
+        val insertEvery = 5;
+        dataList = cars
+            .chunked(insertEvery)
+            .flatMap { listOf(ads[0].copy()) + it };
+
+    }
+
+    fun addItem(position: Int, car: MainItem.Car) {
+        dataList = dataList.take(position) + car + dataList.drop(position)
+    }
+
+    fun deleteItem(item: MainItem) {
+        dataList = dataList.filter {
+            it !== item
+        }
+    }
 }

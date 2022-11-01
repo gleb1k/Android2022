@@ -13,6 +13,7 @@ class CarItem(
     private val binding: ItemCarBinding,
     private val glide: RequestManager,
     private val onItemClick: (Int) -> Unit,
+    private val actionDelete: (MainItem.Car) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(car: MainItem.Car) {
@@ -24,43 +25,40 @@ class CarItem(
                 .load(car.url)
                 .into(ivCover)
 
-            root.setOnClickListener {
-                onItemClick(car.id)
+            ivDelete.setOnClickListener {
+                actionDelete(car)
             }
-            ivDelete.setOnClickListener{
+        }
+    }
+//    fun onBind(
+//        book: MainItem.Car,
+//        payloads: MutableList<Any>
+//    ) {
+//        (payloads.last() as? Bundle)?.also { bundle ->
+//            updateFromBundle(bundle)
+//        }
+//    }
+//
+//    fun onBind(
+//        book: MainItem.Car,
+//        bundle: Bundle
+//    ) {
+//        updateFromBundle(bundle)
+//    }
 
-            }
-        }
-    }
-    fun onBind(
-        book: MainItem.Car,
-        payloads: MutableList<Any>
-    ) {
-        (payloads.last() as? Bundle)?.also { bundle ->
-            updateFromBundle(bundle)
-        }
-    }
-
-    fun onBind(
-        book: MainItem.Car,
-        bundle: Bundle
-    ) {
-        updateFromBundle(bundle)
-    }
-
-    fun updateFromBundle(bundle: Bundle?) {
-        if (bundle?.containsKey(ARG_BRAND) == true) {
-            bundle.getString(ARG_BRAND).also {
-                binding.tvBrand.text = it
-            }
-        }
-        if (bundle?.containsKey(ARG_NAME) == true) {
-            bundle.getString(ARG_NAME).also {
-                binding.tvTitle.text = it
-            }
-        }
-        binding.ivCover.setImageResource(R.drawable.cote)
-    }
+//    fun updateFromBundle(bundle: Bundle?) {
+//        if (bundle?.containsKey(ARG_BRAND) == true) {
+//            bundle.getString(ARG_BRAND).also {
+//                binding.tvBrand.text = it
+//            }
+//        }
+//        if (bundle?.containsKey(ARG_NAME) == true) {
+//            bundle.getString(ARG_NAME).also {
+//                binding.tvTitle.text = it
+//            }
+//        }
+//        binding.ivCover.setImageResource(R.drawable.cote)
+//    }
 
     companion object {
 
@@ -71,6 +69,7 @@ class CarItem(
             parent: ViewGroup,
             glide: RequestManager,
             onItemClick: (Int) -> Unit,
+            actionDelete: (MainItem.Car) -> Unit,
         ) = CarItem(
             binding = ItemCarBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -78,7 +77,8 @@ class CarItem(
                 false
             ),
             glide = glide,
-            onItemClick = onItemClick
+            onItemClick = onItemClick,
+            actionDelete = actionDelete
         )
     }
 }

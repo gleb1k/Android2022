@@ -3,7 +3,6 @@ package com.example.android2022.model
 sealed interface MainItem {
 
     data class Car(
-        val id: Int,
         val name: String,
         val brand: String,
         val info: String,
