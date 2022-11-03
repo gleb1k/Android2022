@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_graph"
+        app:startDestination="@id/graph_first">
+
+    <fragment
+            android:id="@+id/thirdFragment"
+            android:name="com.example.android2022.ThirdFragment"
+            android:label="ThirdFragment" />
+    <fragment
+            android:id="@+id/secondFragment"
+            android:name="com.example.android2022.SecondFragment"
+            android:label="SecondFragment" />
+    <fragment
+            android:id="@+id/fourthFragment"
+            android:name="com.example.android2022.FourthFragment"
+            android:label="FourthFragment" />
+    <fragment
+            android:id="@+id/fifthFragment"
+            android:name="com.example.android2022.FifthFragment"
+            android:label="FifthFragment" />
+
+    <include app:graph="@navigation/first_graph" />
+</navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/graph_first"
+            android:title="first" />
+    <item
+            android:id="@+id/secondFragment"
+            android:title="second" />
+    <item
+            android:id="@+id/thirdFragment"
+            android:title="third" />
+    <item
+            android:id="@+id/fourthFragment"
+            android:title="fourth" />
+    <item
+            android:id="@+id/fifthFragment"
+            android:title="fifth" />
+
+</menu>

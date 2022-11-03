@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/graph_first"
+        app:startDestination="@id/firstFragment">
+
+
+    <fragment
+            android:id="@+id/AFragment"
+            android:name="com.example.android2022.AFragment"
+            android:label="AFragment" />
+    <fragment
+            android:id="@+id/BFragment"
+            android:name="com.example.android2022.BFragment"
+            android:label="BFragment" />
+    <fragment
+            android:id="@+id/CFragment"
+            android:name="com.example.android2022.CFragment"
+            android:label="CFragment" />
+    <fragment
+            android:id="@+id/DFragment"
+            android:name="com.example.android2022.DFragment"
+            android:label="DFragment" />
+    <fragment
+            android:id="@+id/firstFragment"
+            android:name="com.example.android2022.FirstFragment"
+            android:label="FirstFragment" >
+        <action
+                android:id="@+id/action_firstFragment_to_AFragment"
+                app:destination="@id/AFragment" />
+        <action
+                android:id="@+id/action_firstFragment_to_DFragment"
+                app:destination="@id/DFragment" />
+        <action
+                android:id="@+id/action_firstFragment_to_CFragment"
+                app:destination="@id/CFragment" />
+        <action
+                android:id="@+id/action_firstFragment_to_BFragment"
+                app:destination="@id/BFragment" />
+    </fragment>
+</navigation>
