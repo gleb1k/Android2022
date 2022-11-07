@@ -11,11 +11,6 @@ class AwakeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_awake)
-
-//        val imageView = findViewById<ImageView>(R.id.iv)
-//        imageView.setImageResource(R.drawable.skyrim_finally_awake)
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
