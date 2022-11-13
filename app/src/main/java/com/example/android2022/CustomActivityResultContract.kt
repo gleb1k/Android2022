@@ -4,21 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Parcelable
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContract
+import java.io.ByteArrayOutputStream
 
-class CustomActivityResultContract : ActivityResultContract<Intent, Uri?>() {
+class CustomActivityResultContract(private val context: Context) :
+    ActivityResultContract<Intent, Bitmap?>() {
 
     override fun createIntent(context: Context, input: Intent): Intent {
 
-        //return Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-        var temp = input.getParcelableExtra<Parcelable>("data")
-
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//            .putExtra(MediaStore.EXTRA_OUTPUT, input.getParcelableExtra<Parcelable>("data"))
 
         val galleryIntent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
@@ -31,18 +29,25 @@ class CustomActivityResultContract : ActivityResultContract<Intent, Uri?>() {
         return chooserIntent
     }
 
-    override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+    override fun parseResult(resultCode: Int, intent: Intent?): Bitmap? {
+        if (resultCode == Activity.RESULT_CANCELED)
+            return null
 
-        val data = intent.takeIf { resultCode == Activity.RESULT_OK }
-            ?.getParcelableExtra<Parcelable>("data") as? Uri
-//        val bitmap = data.
-        val uri = intent?.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri
-        if (data == null)
-            return intent?.data
-        else
-            return data
-//        val temp = intent?.data
-//        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(temp))
-//        return intent.takeIf { resultCode == Activity.RESULT_OK }?.getParcelableExtra(Intent.EXTRA_STREAM)
+        //камера
+        val bitmap = intent.takeIf { resultCode == Activity.RESULT_OK }
+            ?.getParcelableExtra<Parcelable>("data")
+        //галерея
+        val uri = intent.takeIf { resultCode == Activity.RESULT_OK }?.data
+        //говнокод
+        if (bitmap != null) {
+            return bitmap as Bitmap
+        } else
+            if (uri != null)
+                return BitmapFactory.decodeStream(
+                    context
+                        .contentResolver.openInputStream(uri)
+                )
+            else
+                return null
     }
 }

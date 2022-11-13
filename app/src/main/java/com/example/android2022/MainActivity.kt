@@ -2,27 +2,24 @@ package com.example.android2022
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.android2022.databinding.ActivityMainBinding
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
 
+
     private val getContent =
-        registerForActivityResult(CustomActivityResultContract()) { uri ->
-            if (uri != null) {
-                binding!!.iv.setImageURI(uri)
+        registerForActivityResult(CustomActivityResultContract(this@MainActivity)) { bm ->
+            if (bm != null) {
+                binding!!.iv.setImageBitmap(bm)
             }
         }
 
@@ -41,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).takeIf {
             it.resolveActivity(this.packageManager) != null
         }
+
         val galleryIntent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
         }
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                         requestPermissionLauncher.launch(
                             android.Manifest.permission.CAMERA
                         )
-                       getContent.launch(chooser)
+                        getContent.launch(chooser)
                     }
                     else -> {
                         requestPermissionLauncher.launch(
@@ -77,8 +75,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
-
-
 }
