@@ -2,13 +2,17 @@ package com.example.android2022
 
 import android.app.Service
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
 import android.view.View
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.example.android2022.databinding.FragmentMusicInfoBinding
+import java.lang.Exception
 
 class MusicInfoFragment : Fragment(R.layout.fragment_music_info) {
 
@@ -60,10 +64,44 @@ class MusicInfoFragment : Fragment(R.layout.fragment_music_info) {
                 music = MusicRepository.next(musicId)
                 generateView()
             }
+//            seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+//                override fun onProgressChanged(
+//                    seekBar: SeekBar?,
+//                    progress: Int,
+//                    fromUser: Boolean
+//                ) {
+//                    if (fromUser) binder?.seekTo(progress)
+//                }
+//
+//                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+//                }
+//
+//                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+//                }
+//
+//            })
         }
-
-
     }
+//    private fun initialiseSeekBar(){
+//        binding?.run{
+//            seekbar.max = binder?.mediaPlayerDuration()!!
+//
+//            val handler = Handler()
+//            handler.postDelayed(object: Runnable {
+//                override fun run() {
+//                    try {
+//                        seekbar.progress = binder?.mediaPlayerCurrentPosition()!!
+//                        handler.postDelayed(this,1000)
+//                    } catch (e: Exception)
+//                    {
+//                        seekbar.progress = 0
+//                    }
+//                }
+//            },0)
+//        }
+//
+//    }
+
 
     private fun generateView() {
         binding?.run {

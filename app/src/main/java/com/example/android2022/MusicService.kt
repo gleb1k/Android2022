@@ -29,8 +29,14 @@ class MusicService : Service() {
             prev()
         }
 
-        fun setMusic(music: Music) {
-            mediaPlayer = MediaPlayer.create(applicationContext, music.audio)
+        fun seekTo(progress: Int){
+            mediaPlayer.seekTo(progress)
+        }
+        fun mediaPlayerDuration() : Int{
+            return mediaPlayer.duration
+        }
+        fun mediaPlayerCurrentPosition() : Int{
+            return mediaPlayer.currentPosition
         }
     }
 
