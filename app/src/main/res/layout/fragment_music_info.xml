@@ -73,8 +73,7 @@
             android:id="@+id/iv_skip_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleX="-1"
-            android:src="@drawable/ic_round_skip_next_24"
+            android:src="@drawable/ic_round_skip_prev_24"
             app:layout_constraintEnd_toStartOf="@+id/iv_play"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/iv_play" />

@@ -12,8 +12,6 @@ import com.example.android2022.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
-    private var musicAdapter: MusicAdapter? = null
-
     private var binder: MusicService.MusicBinder? = null
 
 
@@ -34,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             connection,
             Service.BIND_AUTO_CREATE
         )
+        MusicNotification(this@MainActivity).createChannel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,38 +42,35 @@ class MainActivity : AppCompatActivity() {
             setContentView(it.root)
         }
 
-        musicAdapter = MusicAdapter(
-            MusicRepository.musicList,
-            ::playMusic,
-            ::showMusicInfo
-        )
+        if (savedInstanceState != null) {
+            return
+        }
 
-        binding?.run {
-            rvMusic.adapter = musicAdapter;
+
+        //некрасиво и ладно
+        if (intent.action == MusicNotification.SHOW_INFO_FRAGMENT) {
+            supportFragmentManager.beginTransaction()
+                .add(
+                    R.id.fragment_container,
+                    MainFragment.newInstance("ShowInfoFragment"),
+                    MainFragment.MAIN_FRAGMENT_TAG
+                )
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .add(
+                    R.id.fragment_container,
+                    MainFragment()
+                )
+                .commit()
         }
 
     }
 
-    private fun playMusic(position: Int) {
-        musicAdapter?.notifyDataSetChanged()
-        binder?.playPauseMusic(position)
+    override fun onDestroy() {
+        binder = null
+        binding = null
+        MusicNotification(this@MainActivity).closeNotification()
+        super.onDestroy()
     }
-
-    private fun showMusicInfo(position: Int) {
-        supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                androidx.appcompat.R.anim.abc_fade_in,
-                androidx.appcompat.R.anim.abc_fade_out,
-                androidx.appcompat.R.anim.abc_fade_in,
-                androidx.appcompat.R.anim.abc_fade_out,
-            )
-            .add(
-                R.id.fragment_container,
-                MusicInfoFragment.newInstance(position.toString()),
-                MusicInfoFragment.MUSIC_INFO_FRAGMENT_TAG
-            )
-            .addToBackStack(null)
-            .commit()
-    }
-
 }

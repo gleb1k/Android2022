@@ -51,17 +51,37 @@ object MusicRepository {
         ),
     )
 
+    fun newNext(): Int {
+        if (currentId == musicList.size - 1) {
+            currentId = 0
+        } else {
+            currentId +=1
+        }
+        return currentId
+    }
+
+    fun newPrev(): Int {
+        if (currentId == 0) {
+            currentId = musicList.size - 1
+        } else {
+            currentId -=1
+        }
+        return currentId
+    }
+
     fun next(currentPosition: Int): Music {
-        if (currentPosition == musicList.size-1)
+        if (currentPosition == musicList.size - 1)
             return musicList[0]
         else
-            return musicList[currentPosition+1]
+            return musicList[currentPosition + 1]
     }
 
     fun prev(currentPosition: Int): Music {
-        if (currentPosition==0)
-            return musicList[musicList.size-1]
+        if (currentPosition == 0)
+            return musicList[musicList.size - 1]
         else
-            return musicList[currentPosition-1]
+            return musicList[currentPosition - 1]
     }
+
+
 }

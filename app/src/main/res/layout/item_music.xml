@@ -54,8 +54,7 @@
 <!--            android:src="@drawable/ic_round_play_arrow_24"-->
 <!--            android:scaleType="fitCenter"-->
 <!--            app:layout_constraintTop_toTopOf="@+id/tv_name"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_author"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/tv_name" />-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_author" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

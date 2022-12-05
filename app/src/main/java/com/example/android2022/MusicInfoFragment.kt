@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.view.View
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.android2022.databinding.FragmentMusicInfoBinding
 import java.lang.Exception
@@ -25,6 +26,7 @@ class MusicInfoFragment : Fragment(R.layout.fragment_music_info) {
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             binder = service as? MusicService.MusicBinder
+            initialiseSeekBar()
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -40,67 +42,75 @@ class MusicInfoFragment : Fragment(R.layout.fragment_music_info) {
             Service.BIND_AUTO_CREATE
         )
         val musicId = arguments?.getString(MUSIC_INFO_FRAGMENT_TAG)!!.toInt()
+        MusicRepository.currentId = musicId
         music = MusicRepository.musicList[musicId]
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMusicInfoBinding.bind(view)
-        val musicId = MusicRepository.musicList.indexOfFirst { music == it }
 
         binding?.run {
             generateView()
 
             ivPlay.setOnClickListener {
-                binder?.playPauseMusic(musicId)
+                binder?.playPauseMusic()
+                generatePlayPause()
             }
             ivSkipBack.setOnClickListener {
                 binder?.prevMusic()
-                music = MusicRepository.prev(musicId)
+                music = MusicRepository.musicList[MusicRepository.currentId]
                 generateView()
+                initialiseSeekBar()
             }
             ivSkipNext.setOnClickListener {
                 binder?.nextMusic()
-                music = MusicRepository.next(musicId)
+                music = MusicRepository.musicList[MusicRepository.currentId]
                 generateView()
+                initialiseSeekBar()
             }
-//            seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-//                override fun onProgressChanged(
-//                    seekBar: SeekBar?,
-//                    progress: Int,
-//                    fromUser: Boolean
-//                ) {
-//                    if (fromUser) binder?.seekTo(progress)
-//                }
-//
-//                override fun onStartTrackingTouch(seekBar: SeekBar?) {
-//                }
-//
-//                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-//                }
-//
-//            })
+
+            seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    if (fromUser) binder?.seekTo(progress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                }
+
+            })
         }
     }
-//    private fun initialiseSeekBar(){
-//        binding?.run{
-//            seekbar.max = binder?.mediaPlayerDuration()!!
-//
-//            val handler = Handler()
-//            handler.postDelayed(object: Runnable {
-//                override fun run() {
-//                    try {
-//                        seekbar.progress = binder?.mediaPlayerCurrentPosition()!!
-//                        handler.postDelayed(this,1000)
-//                    } catch (e: Exception)
-//                    {
-//                        seekbar.progress = 0
-//                    }
-//                }
-//            },0)
-//        }
-//
-//    }
+
+    //старое, но как сделать правильно не знаю
+    private fun initialiseSeekBar() {
+        if (binder != null) {
+            binding?.run {
+                seekbar.max = binder?.mediaPlayerDuration()!!
+
+                val handler = Handler()
+                handler.postDelayed(object : Runnable {
+                    override fun run() {
+                        try {
+                            seekbar.progress = binder?.mediaPlayerCurrentPosition()!!
+                            handler.postDelayed(this, 1000)
+                        } catch (e: Exception) {
+                            seekbar.progress = 0
+                        }
+                    }
+                }, 0)
+            }
+        }
+
+    }
 
 
     private fun generateView() {
@@ -109,13 +119,17 @@ class MusicInfoFragment : Fragment(R.layout.fragment_music_info) {
             tvAuthor.text = music?.author
             tvName.text = music?.name
             tvGenre.text = music?.genre
+        }
+        generatePlayPause()
+    }
 
+    private fun generatePlayPause() {
+        binding?.run {
             if (MusicRepository.isPlaying) {
                 ivPlay.setImageResource(R.drawable.ic_round_pause_24)
             } else {
                 ivPlay.setImageResource(R.drawable.ic_round_play_arrow_24)
             }
-
         }
     }
 

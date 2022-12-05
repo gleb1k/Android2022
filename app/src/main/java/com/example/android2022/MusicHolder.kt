@@ -31,13 +31,12 @@ class MusicHolder(
             ivCover.setOnClickListener {
                actionShowInfo(MusicRepository.musicList.indexOfFirst { music == it })
             }
-            tvName.setOnClickListener {
-                actionShowInfo(MusicRepository.musicList.indexOfFirst { music == it })
-            }
-            tvAuthor.setOnClickListener {
-                actionShowInfo(MusicRepository.musicList.indexOfFirst { music == it })
-            }
-
+//            tvName.setOnClickListener {
+//                actionShowInfo(MusicRepository.musicList.indexOfFirst { music == it })
+//            }
+//            tvAuthor.setOnClickListener {
+//                actionShowInfo(MusicRepository.musicList.indexOfFirst { music == it })
+//            }
             root.setOnClickListener {
                 actionPlay(MusicRepository.musicList.indexOfFirst { music == it })
             }
