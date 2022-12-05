@@ -1,11 +1,11 @@
-package MusicPackage
+package com.example.android2022
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class MusicAdapter(
     private var list : List<Music>,
-    private var actionPlay : (Music) -> Unit,
+    private var actionPlay : (Int) -> Unit,
     private var actionShowInfo : (Int) -> Unit
 ) : RecyclerView.Adapter<MusicHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicHolder {

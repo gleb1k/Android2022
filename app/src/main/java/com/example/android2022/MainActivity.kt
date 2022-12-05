@@ -1,9 +1,5 @@
 package com.example.android2022
 
-import MusicPackage.Music
-import MusicPackage.MusicAdapter
-import MusicPackage.MusicInfoFragment
-import MusicPackage.MusicRepository
 import android.app.Service
 import android.content.ComponentName
 import android.content.Intent
@@ -11,8 +7,6 @@ import android.content.ServiceConnection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.os.Parcelable
-import android.widget.Toast
 import com.example.android2022.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -61,8 +55,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun playMusic(music: Music) {
-        binder?.playMusic(music)
+    private fun playMusic(position: Int) {
+        musicAdapter?.notifyDataSetChanged()
+        binder?.playPauseMusic(position)
     }
 
     private fun showMusicInfo(position: Int) {
@@ -78,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 MusicInfoFragment.newInstance(position.toString()),
                 MusicInfoFragment.MUSIC_INFO_FRAGMENT_TAG
             )
-            .addToBackStack(MusicInfoFragment.MUSIC_INFO_FRAGMENT_TAG)
+            .addToBackStack(null)
             .commit()
     }
 

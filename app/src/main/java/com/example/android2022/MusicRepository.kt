@@ -1,8 +1,10 @@
-package MusicPackage
-
-import com.example.android2022.R
+package com.example.android2022
 
 object MusicRepository {
+
+    var currentId = -1
+    var isPlaying = false
+
     val musicList: List<Music> = arrayListOf(
         Music(
             "REASON TO LIVE",
@@ -48,4 +50,18 @@ object MusicRepository {
             R.raw.lsp_autoplay
         ),
     )
+
+    fun next(currentPosition: Int): Music {
+        if (currentPosition == musicList.size-1)
+            return musicList[0]
+        else
+            return musicList[currentPosition+1]
+    }
+
+    fun prev(currentPosition: Int): Music {
+        if (currentPosition==0)
+            return musicList[musicList.size-1]
+        else
+            return musicList[currentPosition-1]
+    }
 }

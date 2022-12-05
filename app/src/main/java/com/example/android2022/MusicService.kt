@@ -1,12 +1,10 @@
 package com.example.android2022
 
-import MusicPackage.Music
 import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
 
 class MusicService : Service() {
 
@@ -14,37 +12,57 @@ class MusicService : Service() {
 
     inner class MusicBinder : Binder() {
 
-        fun playMusic(music: Music) {
-            play(music)
+        fun playPauseMusic(musicId: Int) {
+            if (MusicRepository.currentId != musicId) {
+                mediaPlayer.stop()
+                mediaPlayer = MediaPlayer.create(applicationContext, MusicRepository.musicList[musicId].audio)
+                MusicRepository.currentId = musicId
+            }
+            playPause()
         }
 
-        fun pauseMusic() {
-            pause()
+        fun nextMusic() {
+            next()
+        }
+
+        fun prevMusic() {
+            prev()
+        }
+
+        fun setMusic(music: Music) {
+            mediaPlayer = MediaPlayer.create(applicationContext, music.audio)
         }
     }
 
 
-    override fun onBind(intent: Intent?): IBinder? = MusicBinder()
+    override fun onBind(intent: Intent?): IBinder = MusicBinder()
 
-    private fun play(music: Music) {
-        playLocaleMusic(music)
-    }
-
-    private fun pause() {
-        mediaPlayer.pause()
-    }
-
-    private fun stop() {
+    fun prev(){
         mediaPlayer.stop()
+        mediaPlayer =
+            MediaPlayer.create(applicationContext, MusicRepository.prev(MusicRepository.currentId).audio)
+        playPause()
     }
 
-    private fun playLocaleMusic(music: Music) {
-        if (mediaPlayer.isPlaying) mediaPlayer.stop()
-        mediaPlayer = MediaPlayer.create(applicationContext, music.audio)
+    fun next()
+    {
+        mediaPlayer.stop()
+        mediaPlayer =
+            MediaPlayer.create(applicationContext, MusicRepository.next(MusicRepository.currentId).audio)
+        playPause()
+    }
+
+    private fun playPause() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            MusicRepository.isPlaying = false
+            return
+        }
         mediaPlayer.run {
             start()
+            MusicRepository.isPlaying = true
             setOnCompletionListener {
-                stop() // or call next() for change track
+                next()
             }
         }
     }

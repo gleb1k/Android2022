@@ -1,4 +1,4 @@
-package MusicPackage
+package com.example.android2022
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
