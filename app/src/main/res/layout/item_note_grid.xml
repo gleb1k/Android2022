@@ -7,6 +7,7 @@
         android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardCornerRadius="16dp"
@@ -22,6 +23,7 @@
                 android:background="#2A6D1177">
 
             <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/name"
@@ -32,23 +34,23 @@
                     android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/textView" />
-
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                    android:id="@+id/tv_date"
+                    android:id="@+id/tv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="Описание"
-                    android:maxLength="50"
+                    android:maxLength="100"
                     android:textSize="18sp"
                     android:maxLines="8"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
+                    android:id="@+id/iv_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_round_delete_24"

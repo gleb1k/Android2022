@@ -1,10 +1,10 @@
-package com.example.android2022
+package com.example.android2022.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
+import com.example.android2022.R
 import com.example.android2022.databinding.ActivityMainBinding
-import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,12 +16,16 @@ class MainActivity : AppCompatActivity() {
             setContentView(it.root)
         }
 
-
-
+        supportFragmentManager.beginTransaction()
+            .add(
+                R.id.fragment_container,
+                MainFragment()
+            )
+            .commit()
     }
 
     override fun onDestroy() {
-        binding = null
         super.onDestroy()
+        binding = null
     }
 }

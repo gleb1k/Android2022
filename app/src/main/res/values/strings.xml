@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Android2022</string>
     <string name="name">Название</string>
+    <string name="create_first_note">Для начала работы создайте первую цель</string>
+    <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
 </resources>
