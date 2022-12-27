@@ -9,6 +9,7 @@ import com.example.android2022.data.Note
 import com.example.android2022.data.NoteRepository
 import com.example.android2022.databinding.FragmentMainBinding
 import com.example.android2022.ui.recyclerView.NoteAdapter
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -23,10 +24,20 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
         repository = NoteRepository(view.context)
-//        lifecycleScope.launch {
-//            val temp = async {repository?.getAll()}
-//            noteList = temp.await()
-//        }
+        lifecycleScope.launch {
+            val temp = lifecycleScope.async {
+                repository?.getAll()
+            }
+            noteList = temp.await()
+            binding?.run {
+                if (noteList == null || noteList?.isEmpty() == true)
+                    tvCreateFirstNote.visibility = View.VISIBLE
+                else {
+                    tvCreateFirstNote.visibility = View.GONE
+                }
+                var temp2 = noteList!![0]
+            }
+        }
 
         binding?.run {
             fab.setOnClickListener {
@@ -35,17 +46,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             //Задаю адаптер
             adapter = NoteAdapter(onItemClick = ::showEditCreationFrag)
-            lifecycleScope.launch {
-                adapter?.submitList(repository?.getAll())
-            }
+            adapter?.submitList(noteList)
+//            lifecycleScope.launch {
+//                adapter?.submitList(repository?.getAll())
+//            }
             rvNote.adapter = adapter
 
             //Проверка на пустоту
-            if (noteList?.isEmpty() == true)
-                tvCreateFirstNote.visibility = View.VISIBLE
-            else {
-                tvCreateFirstNote.visibility = View.GONE
-            }
+//            if (noteList == null || noteList?.isEmpty() == true)
+//                tvCreateFirstNote.visibility = View.VISIBLE
+//            else {
+//                tvCreateFirstNote.visibility = View.GONE
+//            }
         }
     }
 

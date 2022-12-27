@@ -25,8 +25,8 @@ class NoteHolder(
             }
             ivDelete.setOnClickListener {
                 //todo
-                lifecycleScope.launch {
-                }
+//                lifecycleScope.launch {
+//                }
             }
         }
     }
