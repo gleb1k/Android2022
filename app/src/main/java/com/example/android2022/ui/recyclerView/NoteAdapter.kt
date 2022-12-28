@@ -7,6 +7,7 @@ import com.example.android2022.data.Note
 
 class NoteAdapter(
     private val onItemClick: (Int) -> Unit,
+    private val onDeleteItem: (Int) -> Unit
 ) :
     ListAdapter<Note, NoteHolder>(object : DiffUtil.ItemCallback<Note>() {
         override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean =
@@ -17,7 +18,7 @@ class NoteAdapter(
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder =
-        NoteHolder.create(parent, onItemClick)
+        NoteHolder.create(parent, onItemClick, onDeleteItem)
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         holder.onBind(currentList[position])

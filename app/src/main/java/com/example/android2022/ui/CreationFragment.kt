@@ -1,7 +1,13 @@
 package com.example.android2022.ui
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.android2022.R
@@ -9,6 +15,8 @@ import com.example.android2022.data.Note
 import com.example.android2022.data.NoteRepository
 import com.example.android2022.databinding.FragmentCreateBinding
 import kotlinx.coroutines.launch
+import java.util.*
+import java.util.jar.Manifest
 
 class CreationFragment : Fragment(R.layout.fragment_create) {
 
@@ -49,6 +57,14 @@ class CreationFragment : Fragment(R.layout.fragment_create) {
         }
     }
 
+    private fun getLocation() {
+//        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        if ((ContextCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+//            ActivityCompat.requestPermissions(context!!, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+//        }
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+    }
+
     private fun navigateToMainFrag() {
         parentFragmentManager.beginTransaction()
             .replace(
@@ -62,10 +78,11 @@ class CreationFragment : Fragment(R.layout.fragment_create) {
         binding?.run {
             val title = etTitle.text.toString()
             val description = etDescription.text.toString()
+            val date = Calendar.getInstance().time
 
             lifecycleScope.launch {
                 id?.let{
-                    repository?.update(Note(it, title, description))
+                    repository?.update(Note(it, title, description,date= date))
                 }
             }
         }
@@ -75,9 +92,10 @@ class CreationFragment : Fragment(R.layout.fragment_create) {
         binding?.run {
             val title = etTitle.text.toString()
             val description = etDescription.text.toString()
+            val date = Calendar.getInstance().time
 
             lifecycleScope.launch {
-                repository?.save(Note(0, title, description))
+                repository?.save(Note(0, title, description, date = date))
             }
         }
     }

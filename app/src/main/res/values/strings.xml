@@ -4,4 +4,6 @@
     <string name="create_first_note">Для начала работы создайте первую цель</string>
     <string name="add">Добавить</string>
     <string name="save">Сохранить</string>
+    <string name="delete_all">Удалить все</string>
+    <string name="change_theme">Изменить тему</string>
 </resources>

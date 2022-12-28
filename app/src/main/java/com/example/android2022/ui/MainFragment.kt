@@ -1,15 +1,18 @@
 package com.example.android2022.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.android2022.R
-import com.example.android2022.data.Note
 import com.example.android2022.data.NoteRepository
 import com.example.android2022.databinding.FragmentMainBinding
 import com.example.android2022.ui.recyclerView.NoteAdapter
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -17,47 +20,87 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private var binding: FragmentMainBinding? = null
     private var repository: NoteRepository? = null
     private var adapter: NoteAdapter? = null
-    private var noteList: List<Note>? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar, menu)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
         repository = NoteRepository(view.context)
-        lifecycleScope.launch {
-            val temp = lifecycleScope.async {
-                repository?.getAll()
+
+        binding?.run {
+            //Проверка на пустоту
+            showTextViewCreate()
+            fab.setOnClickListener {
+                showNewCreationFrag()
             }
-            noteList = temp.await()
-            binding?.run {
-                if (noteList == null || noteList?.isEmpty() == true)
+            //Задаю адаптер
+            lifecycleScope.launch {
+                adapter = NoteAdapter(
+                    onItemClick = ::showEditCreationFrag,
+                    onDeleteItem = ::deleteNote
+                )
+                adapter?.submitList(repository?.getAll())
+                rvNote.adapter = adapter
+            }
+
+        }
+    }
+
+    private fun isDarkModeOn(): Boolean {
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_theme -> {
+                if(isDarkModeOn()){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                true
+            }
+            R.id.action_delete_all -> {
+                lifecycleScope.launch {
+                    repository?.deleteAll()
+                    adapter?.submitList(repository?.getAll())
+                    showTextViewCreate()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    private fun showTextViewCreate() {
+        binding?.run {
+            lifecycleScope.launch {
+                if (repository?.getAll()?.isEmpty() == true)
                     tvCreateFirstNote.visibility = View.VISIBLE
                 else {
                     tvCreateFirstNote.visibility = View.GONE
                 }
-                var temp2 = noteList!![0]
             }
         }
+    }
 
-        binding?.run {
-            fab.setOnClickListener {
-                showNewCreationFrag()
-            }
-
-            //Задаю адаптер
-            adapter = NoteAdapter(onItemClick = ::showEditCreationFrag)
-            adapter?.submitList(noteList)
-//            lifecycleScope.launch {
-//                adapter?.submitList(repository?.getAll())
-//            }
-            rvNote.adapter = adapter
-
-            //Проверка на пустоту
-//            if (noteList == null || noteList?.isEmpty() == true)
-//                tvCreateFirstNote.visibility = View.VISIBLE
-//            else {
-//                tvCreateFirstNote.visibility = View.GONE
-//            }
+    private fun deleteNote(id: Int) {
+        lifecycleScope.launch {
+            val note = repository?.get(id)
+            if (note != null)
+                repository?.delete(note)
+            adapter?.submitList(repository?.getAll())
+            showTextViewCreate()
         }
     }
 

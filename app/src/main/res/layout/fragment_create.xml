@@ -20,6 +20,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_title"
+                android:text="Покормить собаку"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
@@ -31,10 +32,10 @@
             android:id="@+id/et_description"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="Напоминание очень важное!!!"
+            android:text="Будущий я, пожалуйста, накорми Бобика("
             android:gravity="top|start"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:inputType="textMultiLine|textCapSentences"

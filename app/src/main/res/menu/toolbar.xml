@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+                android:id="@+id/action_theme"
+                android:icon="@drawable/ic_round_color_lens_40"
+                android:title="@string/change_theme"
+                app:showAsAction="ifRoom"
+                android:iconTint="@color/design_default_color_on_secondary"/>
+        <item
+                android:id="@+id/action_delete_all"
+                android:icon="@drawable/ic_round_delete_sweep_24"
+                android:title="@string/delete_all"
+                app:showAsAction="ifRoom|withText"/>
+
+    </menu>
