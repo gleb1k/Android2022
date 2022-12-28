@@ -15,6 +15,7 @@ import com.example.android2022.data.Note
 import com.example.android2022.data.NoteRepository
 import com.example.android2022.databinding.FragmentCreateBinding
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.jar.Manifest
 

@@ -1,5 +1,6 @@
 package com.example.android2022.ui
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android2022.R
 import com.example.android2022.data.NoteRepository
 import com.example.android2022.databinding.FragmentMainBinding
@@ -41,28 +45,26 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             fab.setOnClickListener {
                 showNewCreationFrag()
             }
-            //Задаю адаптер
-            lifecycleScope.launch {
-                adapter = NoteAdapter(
-                    onItemClick = ::showEditCreationFrag,
-                    onDeleteItem = ::deleteNote
-                )
-                adapter?.submitList(repository?.getAll())
-                rvNote.adapter = adapter
+            val temp = loadFlag()
+            when (loadFlag()) {
+                GRID_FLAG -> rvNote.layoutManager = GridLayoutManager(context, 2).also {
+                    setAdapter(it)
+                }
+                LINEAR_FLAG -> rvNote.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                ).also {
+                    setAdapter(it)
+                }
             }
-
         }
-    }
-
-    private fun isDarkModeOn(): Boolean {
-        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_theme -> {
-                if(isDarkModeOn()){
+                if (isDarkModeOn()) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -77,10 +79,64 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 }
                 true
             }
+            R.id.action_layout_manager -> {
+                binding?.run {
+                    when (rvNote.layoutManager) {
+                        is GridLayoutManager ->
+                            rvNote.layoutManager = LinearLayoutManager(
+                                context,
+                                LinearLayoutManager.VERTICAL,
+                                false
+                            ).also {
+                                setAdapter(it)
+                                saveFlag(LINEAR_FLAG)
+                            }
+                        is LinearLayoutManager ->
+                            rvNote.layoutManager = GridLayoutManager(context, 2).also {
+                                setAdapter(it)
+                                saveFlag(GRID_FLAG)
+                            }
+                    }
+                }
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    private fun loadFlag(): String {
+        val sharedPreference =
+            requireActivity().getSharedPreferences("LayoutManagerSP", Context.MODE_PRIVATE)
+        return sharedPreference.getString(RECYCLER_VIEW_KEY, GRID_FLAG) ?: GRID_FLAG
+    }
+
+    private fun saveFlag(flag: String) {
+        val sharedPreference =
+            requireActivity().getSharedPreferences("LayoutManagerSP", Context.MODE_PRIVATE)
+        sharedPreference.edit().apply {
+            putString(RECYCLER_VIEW_KEY, flag)
+        }.apply()
+    }
+
+
+    private fun setAdapter(layoutManager: RecyclerView.LayoutManager) {
+        binding?.run {
+            lifecycleScope.launch {
+                adapter = NoteAdapter(
+                    layoutManager = layoutManager,
+                    onItemClick = ::showEditCreationFrag,
+                    onDeleteItem = ::deleteNote
+                )
+                adapter?.submitList(repository?.getAll())
+                rvNote.adapter = adapter
+            }
+        }
+    }
+
+    private fun isDarkModeOn(): Boolean {
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES
+    }
 
     private fun showTextViewCreate() {
         binding?.run {
@@ -132,6 +188,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     companion object {
+        private const val RECYCLER_VIEW_KEY = "RECYCLER_VIEW_KEY"
+        private const val GRID_FLAG = "GRID_FLAG"
+        private const val LINEAR_FLAG = "LINEAR_FLAG"
+
         private const val MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG"
 
         fun getInstance(message: String) = MainFragment().apply {
