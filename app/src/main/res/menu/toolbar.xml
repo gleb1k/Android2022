@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_layout_manager"
+        android:icon="@drawable/ic_round_view_quilt_40"
+        android:title="Изменить вид"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_theme"
+        android:icon="@drawable/ic_round_color_lens_40"
+        android:title="@string/change_theme"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_delete_all"
+        android:icon="@drawable/ic_round_delete_sweep_24"
+        android:title="@string/delete_all"
+        app:showAsAction="always" />
+
+</menu>
